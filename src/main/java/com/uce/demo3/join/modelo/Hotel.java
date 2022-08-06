@@ -2,8 +2,10 @@ package com.uce.demo3.join.modelo;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -26,8 +28,8 @@ public class Hotel {
 	
 	@Column(name = "hot_direccion")
 	private String direccion;
-
-	@OneToMany(mappedBy="hotelRel")
+																			//	.EAGER	   siempre trae			
+	@OneToMany(mappedBy="hotel", cascade = CascadeType.ALL, fetch = FetchType.LAZY) // solo bajo demanda
 	private List<Habitacion> habitaciones;
 	
 	@Override

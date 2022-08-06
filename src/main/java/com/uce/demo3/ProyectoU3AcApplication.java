@@ -28,19 +28,12 @@ public class ProyectoU3AcApplication implements CommandLineRunner{
 	public void run(String... args) throws Exception {
 		// TODO Auto-generated method stub
 		
-		List<Hotel> listaHotel = this.hotelService.buscarHotelInnerJoin("individual");
-		Log.info(listaHotel);
+		Log.info("\nRelacionamiento where");
 		
-        List<Hotel> listaHotelLeft = this.hotelService.buscarHotelOuterJoinLeft("Duplex");
-        Log.info(listaHotelLeft);
-
-        List<Hotel> listaHotelRigth = this.hotelService.buscarHotelOuterJoinRigth("Individual");
-        Log.info(listaHotelRigth);
-        
-        
-        Log.info(this.hotelService.buscarHotelInnerJoin());
-        
-        Log.info(this.hotelService.buscarHotelOuterJoinLeft());
+		Log.info("\n	" + this.hotelService.buscarHotelJoinWhere("familiar"));
+	
+		Log.info("\nJOIN FETCH");
+		
+		Log.info("\n	" + this.hotelService.buscarHotelJoinFtch("familiar"));	
 	}
-
 }

@@ -31,7 +31,7 @@ public class Habitacion {
 
 	@ManyToOne
 	@JoinColumn(name = "hab_id_hotel_fk")
-	private Hotel hotelRel;	
+	private Hotel hotel;	
 	
 	@Override
 	public String toString() {
@@ -63,12 +63,12 @@ public class Habitacion {
 		this.tipo = tipo;
 	}
 
-	public Hotel getHotelRel() {
-		return hotelRel;
+	public Hotel getHotel() {
+		return hotel;
 	}
 
-	public void setHotelRel(Hotel hotelRel) {
-		this.hotelRel = hotelRel;
+	public void setHotel(Hotel hotelRel) {
+		this.hotel = hotelRel;
 	}	
 	
 	
