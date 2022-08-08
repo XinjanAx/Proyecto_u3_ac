@@ -1,5 +1,6 @@
 package com.uce.demo3.tarea26.repository;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -70,5 +71,21 @@ public class CiudadanoJpaRepositoryImpl implements ICiudadanoJpaRepository{
 		TypedQuery<Ciudadano> myQuery = this.entityManager.createQuery("SELECT c FROM Ciudadano c RIGHT JOIN c.empleo e WHERE e.nombre = :datoNombreE",Ciudadano.class); 
 		myQuery.setParameter("datoNombreE", nombreEmpleo);
 		return myQuery.getResultList();
+	}
+
+	@Override
+	public List<Ciudadano> buscarCiudadanoJoinWhere(BigDecimal salario) {
+		// TODO Auto-generated method stub
+		TypedQuery<Ciudadano> myQuery = this.entityManager.createQuery("SELECT c FROM Ciudadano c, Empleo e WHERE c = e.ciudadano and e.salario = :datoSalario ",Ciudadano.class);
+        myQuery.setParameter("datoSalario", salario);
+        return myQuery.getResultList();
+	}
+
+	@Override
+	public List<Ciudadano> buscarCiudadanoJoinFtch(Integer horasLaborables) {
+		// TODO Auto-generated method stub
+		TypedQuery<Ciudadano> myQuery = this.entityManager.createQuery("SELECT c FROM Ciudadano c JOIN FETCH c.empleo e WHERE  e.horas = :datoHorasL ",Ciudadano.class);
+        myQuery.setParameter("datoHorasL", horasLaborables);
+        return myQuery.getResultList();
 	}
 }

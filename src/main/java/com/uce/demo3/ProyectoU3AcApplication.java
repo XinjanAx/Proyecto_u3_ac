@@ -1,6 +1,7 @@
 package com.uce.demo3;
 
-import java.time.LocalDate;
+
+import java.math.BigDecimal;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -27,11 +28,10 @@ public class ProyectoU3AcApplication implements CommandLineRunner{
 	@Override
 	public void run(String... args) throws Exception {
 		// TODO Auto-generated method stub
-		Log.info("\nINNER Join");
-		Log.info(this.ciudadanoJpaService.buscarCiudadanoInnerJoin(2));
-		Log.info("\nOuter Join LEFT");
-		Log.info(this.ciudadanoJpaService.buscarCiudadanoOuterJoinLeft());
-		Log.info("\nOuter Join RIGHT");
-		Log.info(this.ciudadanoJpaService.buscarCiudadanoOuterJoinRight("Secretaria"));
+		Log.info("\nJoin WHERE");
+		Log.info(this.ciudadanoJpaService.buscarCiudadanoJoinWhere(new BigDecimal(721).divide(new BigDecimal(5))));
+
+		Log.info("\nJoin FETCH");
+		Log.info(this.ciudadanoJpaService.buscarCiudadanoJoinFtch(4));
 	}
 }

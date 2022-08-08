@@ -1,6 +1,8 @@
 package com.uce.demo3.tarea26.repository;
 
+import java.math.BigDecimal;
 import java.util.List;
+
 import com.uce.demo3.tarea26.modelo.Ciudadano;
 
 public interface ICiudadanoJpaRepository {
@@ -13,5 +15,9 @@ public interface ICiudadanoJpaRepository {
     public List<Ciudadano> buscarCiudadanoInnerJoin(Integer horasLaborables);
     public List<Ciudadano> buscarCiudadanoOuterJoinLeft();
     public List<Ciudadano> buscarCiudadanoOuterJoinRight(String nombreEmpleo);
+    
+	public List<Ciudadano> buscarCiudadanoJoinWhere(BigDecimal salario);
+	public List<Ciudadano> buscarCiudadanoJoinFtch(Integer horasLaborables);
+	
     
 }

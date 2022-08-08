@@ -1,5 +1,6 @@
 package com.uce.demo3.tarea26.service;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -58,6 +59,18 @@ public class CiudadanoJpaServiceImpl implements ICiudadanoJpaService{
 	public List<Ciudadano> buscarCiudadanoOuterJoinRight(String nombreEmpleo) {
 		// TODO Auto-generated method stub
 		return this.ciudadanoJpaRepository.buscarCiudadanoOuterJoinRight(nombreEmpleo);
+	}
+
+	@Override
+	public List<Ciudadano> buscarCiudadanoJoinWhere(BigDecimal salario) {
+		// TODO Auto-generated method stub
+		return this.ciudadanoJpaRepository.buscarCiudadanoJoinWhere(salario);
+	}
+
+	@Override
+	public List<Ciudadano> buscarCiudadanoJoinFtch(Integer horasLaborables) {
+		// TODO Auto-generated method stub
+		return this.ciudadanoJpaRepository.buscarCiudadanoJoinFtch(horasLaborables);
 	}
 
 }
