@@ -40,14 +40,14 @@ public class HotelRepositoryImpl implements IHotelRepository{
 
 	@Override
 	public List<Hotel> buscarHotelOuterJoinLeft(String tipoHabitacion) {
-		TypedQuery<Hotel> myQuery = this.entityManager.createQuery("SELECT h FROM Hotel h LEFT JOIN habitacion ha WHERE ha.tipo = :datoTipoHabitacion",Hotel.class); 
+		TypedQuery<Hotel> myQuery = this.entityManager.createQuery("SELECT h FROM Hotel h LEFT JOIN h.habitacion ha WHERE ha.tipo = :datoTipoHabitacion",Hotel.class); 
         myQuery.setParameter("datoTipoHabitacion", tipoHabitacion);
         return myQuery.getResultList();
 	}
 
 	@Override
 	public List<Hotel> buscarHotelOuterJoinLeft() {
-		TypedQuery<Hotel> myQuery = this.entityManager.createQuery("SELECT h FROM Hotel h LEFT JOIN habitacion ha",Hotel.class); 
+		TypedQuery<Hotel> myQuery = this.entityManager.createQuery("SELECT h FROM Hotel h LEFT JOIN h.habitacion ha",Hotel.class); 
         return myQuery.getResultList();
 	}
 	

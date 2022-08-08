@@ -1,6 +1,6 @@
 package com.uce.demo3;
 
-import java.util.List;
+import java.time.LocalDate;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -9,8 +9,8 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import com.uce.demo3.join.modelo.Hotel;
-import com.uce.demo3.join.service.IHotelService;
+import com.uce.demo3.tarea26.service.ICiudadanoJpaService;
+
 
 @SpringBootApplication
 public class ProyectoU3AcApplication implements CommandLineRunner{
@@ -18,7 +18,7 @@ public class ProyectoU3AcApplication implements CommandLineRunner{
 	Logger Log = LogManager.getLogger(LogManager.ROOT_LOGGER_NAME);
 
 	@Autowired
-	private IHotelService hotelService;
+	private ICiudadanoJpaService ciudadanoJpaService;
 	
 	public static void main(String[] args) {
 		SpringApplication.run(ProyectoU3AcApplication.class, args);
@@ -27,13 +27,11 @@ public class ProyectoU3AcApplication implements CommandLineRunner{
 	@Override
 	public void run(String... args) throws Exception {
 		// TODO Auto-generated method stub
-		
-		Log.info("\nRelacionamiento where");
-		
-		Log.info("\n	" + this.hotelService.buscarHotelJoinWhere("familiar"));
-	
-		Log.info("\nJOIN FETCH");
-		
-		Log.info("\n	" + this.hotelService.buscarHotelJoinFtch("familiar"));	
+		Log.info("\nINNER Join");
+		Log.info(this.ciudadanoJpaService.buscarCiudadanoInnerJoin(2));
+		Log.info("\nOuter Join LEFT");
+		Log.info(this.ciudadanoJpaService.buscarCiudadanoOuterJoinLeft());
+		Log.info("\nOuter Join RIGHT");
+		Log.info(this.ciudadanoJpaService.buscarCiudadanoOuterJoinRight("Secretaria"));
 	}
 }

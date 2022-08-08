@@ -28,7 +28,7 @@ public class Hotel {
 	
 	@Column(name = "hot_direccion")
 	private String direccion;
-																			//	.EAGER	   siempre trae			
+																		//	.EAGER	   siempre trae			
 	@OneToMany(mappedBy="hotel", cascade = CascadeType.ALL, fetch = FetchType.LAZY) // solo bajo demanda
 	private List<Habitacion> habitaciones;
 	
