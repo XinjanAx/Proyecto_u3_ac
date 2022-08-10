@@ -10,7 +10,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import com.uce.demo3.tarea26.service.ICiudadanoJpaService;
+import com.uce.demo3.mandatory.service.ITransferenciaService;
 
 
 @SpringBootApplication
@@ -19,7 +19,7 @@ public class ProyectoU3AcApplication implements CommandLineRunner{
 	Logger Log = LogManager.getLogger(LogManager.ROOT_LOGGER_NAME);
 
 	@Autowired
-	private ICiudadanoJpaService ciudadanoJpaService;
+	private ITransferenciaService iTransferenciaService;
 	
 	public static void main(String[] args) {
 		SpringApplication.run(ProyectoU3AcApplication.class, args);
@@ -28,10 +28,9 @@ public class ProyectoU3AcApplication implements CommandLineRunner{
 	@Override
 	public void run(String... args) throws Exception {
 		// TODO Auto-generated method stub
-		Log.info("\nJoin WHERE");
-		Log.info(this.ciudadanoJpaService.buscarCiudadanoJoinWhere(new BigDecimal(721).divide(new BigDecimal(5))));
-
-		Log.info("\nJoin FETCH");
-		Log.info(this.ciudadanoJpaService.buscarCiudadanoJoinFtch(4));
+		
+		Log.info("\nTransferencia");
+		this.iTransferenciaService.realizarTransferencia("2776814596", "2145988986", new BigDecimal(1442.5));
+		
 	}
 }
