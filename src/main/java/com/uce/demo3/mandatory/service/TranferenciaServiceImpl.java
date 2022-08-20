@@ -49,6 +49,9 @@ public class TranferenciaServiceImpl implements ITransferenciaService{
 			t1.setMonto(monto);
 		this.transferenciaRepository.crearTranferencia(t1);
 	
+		if(monto.compareTo(saldo1) > 0) { 
+            throw new RuntimeException(); //ejecuta rollback
+        }	
 	}
 	
 

@@ -34,10 +34,10 @@ public class ProyectoU3AcApplication implements CommandLineRunner{
 		// TODO Auto-generated method stub
 		
 		Log.info("\nTransferencia");
-		//this.iTransferenciaService.realizarTransferencia("2776814596", "2145988986", new BigDecimal(1442.5));
+		this.iTransferenciaService.realizarTransferencia("1215164221", "5788541396", new BigDecimal(5));
 		
 
-		Log.info("\nFacturas\n" + this.iFacturaService.buscarFacturaInnerJoin());
+		//Log.info("\nFacturas\n" + this.iFacturaService.buscarFacturaInnerJoin());
 
 	}
 }

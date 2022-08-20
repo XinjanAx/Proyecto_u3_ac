@@ -33,7 +33,7 @@ public class CuentaBancariaRepositoryImpl implements ICuentaBanRepository{
 	}
 
 	@Override
-	@Transactional(value = TxType.MANDATORY)
+	@Transactional(value = TxType.REQUIRED)
 	public void insertar(CuentaBancaria c) {
 		// TODO Auto-generated method stub
 		this.entityManager.persist(c);
