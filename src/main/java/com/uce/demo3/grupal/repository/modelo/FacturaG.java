@@ -14,8 +14,8 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "factura")
-public class Factura {
+@Table(name = "grupal_factura")
+public class FacturaG {
 
 	@Id
 	@Column(name = "fact_id")
@@ -30,7 +30,7 @@ public class Factura {
 	private String numero;
 
 	@OneToMany(mappedBy = "factura", fetch = FetchType.EAGER)
-	private List<DetalleFactura> detalles;
+	private List<DetalleFacturaG> detalles;
 
 	@Override
 	public String toString() {
@@ -62,11 +62,11 @@ public class Factura {
 		this.numero = numero;
 	}
 
-	public List<DetalleFactura> getDetalles() {
+	public List<DetalleFacturaG> getDetalles() {
 		return detalles;
 	}
 
-	public void setDetalles(List<DetalleFactura> detalles) {
+	public void setDetalles(List<DetalleFacturaG> detalles) {
 		this.detalles = detalles;
 	}
 

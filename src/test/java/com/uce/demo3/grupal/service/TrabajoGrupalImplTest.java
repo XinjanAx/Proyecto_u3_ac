@@ -15,7 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.Rollback;
 
-import com.uce.demo3.grupal.repository.modelo.Factura;
+import com.uce.demo3.grupal.repository.modelo.FacturaG;
 import com.uce.demo3.mandatory.modelo.CuentaBancaria;
 import com.uce.demo3.mandatory.service.ICuentaBanService;
 
@@ -25,7 +25,7 @@ import com.uce.demo3.mandatory.service.ICuentaBanService;
 class TrabajoGrupalImplTest {
 
 	@Autowired
-	private IFacturaService iFacturaService;
+	private IFacturaGService iFacturaService;
 
 	@Autowired
 	private ICuentaBanService iCuentaBancariaService;
@@ -45,7 +45,7 @@ class TrabajoGrupalImplTest {
 	@Test
 	void testActualizarFactura() {
 
-		Factura f = new Factura();
+		FacturaG f = new FacturaG();
 		f.setNumero("26458964-998-998");
 		f.setFecha(LocalDateTime.now());
 
@@ -65,7 +65,7 @@ class TrabajoGrupalImplTest {
 
 	@Test
 	void testBuscarFacturaInnerJoin() {
-		List<Factura> facturas = this.iFacturaService.buscarFacturaInnerJoin();
+		List<FacturaG> facturas = this.iFacturaService.buscarFacturaInnerJoin();
 		assertThat(facturas).isNotEmpty();
 	}
 //

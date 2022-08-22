@@ -13,8 +13,8 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "detalle")
-public class DetalleFactura {
+@Table(name = "grupal_detalle")
+public class DetalleFacturaG {
 
 	@Id
 	@Column(name = "deta_id")
@@ -30,7 +30,7 @@ public class DetalleFactura {
 
 	@ManyToOne
 	@JoinColumn(name = "deta_fact_id")
-	private Factura factura;
+	private FacturaG factura;
 
 
 	@Override
@@ -63,11 +63,11 @@ public class DetalleFactura {
 		this.subtotal = subtotal;
 	}
 
-	public Factura getFactura() {
+	public FacturaG getFactura() {
 		return factura;
 	}
 
-	public void setFactura(Factura factura) {
+	public void setFactura(FacturaG factura) {
 		this.factura = factura;
 	}
 

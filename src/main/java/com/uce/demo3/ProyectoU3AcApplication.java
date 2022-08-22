@@ -1,8 +1,8 @@
 package com.uce.demo3;
 
 
-import java.math.BigDecimal;
-import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -11,9 +11,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import com.uce.demo3.grupal.repository.modelo.Factura;
-import com.uce.demo3.grupal.service.IFacturaService;
-import com.uce.demo3.mandatory.service.ITransferenciaService;
+import com.uce.demo3.tarea31.service.IGestorService;
 
 
 @SpringBootApplication
@@ -22,9 +20,8 @@ public class ProyectoU3AcApplication implements CommandLineRunner{
 	Logger Log = LogManager.getLogger(LogManager.ROOT_LOGGER_NAME);
 
 	@Autowired
-	private ITransferenciaService iTransferenciaService;
-	@Autowired
-	private IFacturaService iFacturaService;
+	private IGestorService gestorService;
+	
 	public static void main(String[] args) {
 		SpringApplication.run(ProyectoU3AcApplication.class, args);
 	}
@@ -33,11 +30,14 @@ public class ProyectoU3AcApplication implements CommandLineRunner{
 	public void run(String... args) throws Exception {
 		// TODO Auto-generated method stub
 		
-		Log.info("\nTransferencia");
-		this.iTransferenciaService.realizarTransferencia("1215164221", "5788541396", new BigDecimal(5));
+		List<String> productos= new ArrayList<>();
 		
+		productos.add("6843521118");
+		productos.add("8475224130");
+		productos.add("3354784562");
+		productos.add("6843521118");
 
-		//Log.info("\nFacturas\n" + this.iFacturaService.buscarFacturaInnerJoin());
+		this.gestorService.comprar("1704456214", "0-0071-0054", productos);
 
 	}
 }
