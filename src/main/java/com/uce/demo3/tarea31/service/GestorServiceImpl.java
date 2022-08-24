@@ -42,6 +42,7 @@ public class GestorServiceImpl implements IGestorService{
 	
 	
 	@Override
+	@Transactional(value = TxType.REQUIRES_NEW)
 	public void comprar(String cedulaCliente, String numeroFactura, List<String> codigos) {
 		 
 		Cliente c1 = this.clienteRepository.buscarCliente(cedulaCliente);
@@ -85,8 +86,8 @@ public class GestorServiceImpl implements IGestorService{
 	@Transactional(value = TxType.REQUIRED)
 	public void actualizarStock(Producto p, Integer cantidad) {
 			Integer stock  = p.getStock() - cantidad;
-	        if(stock <= 0){
-	        this.productoRepository.actualizarProducto(p);
+	        if(stock >= 0){
+	        	this.productoRepository.actualizarProducto(p);
 	        }
 	        else {
 	        	throw new RuntimeException();
@@ -94,6 +95,7 @@ public class GestorServiceImpl implements IGestorService{
 	    }
 
 	@Override
+	@Transactional(value = TxType.REQUIRES_NEW)
 	public void crearFacturaElectronica(String numeroFact, BigDecimal monto, Integer items) {
         FacturaElectronica facturaElectronica = new FacturaElectronica();
         facturaElectronica.setFecha(LocalDateTime.now());
@@ -103,6 +105,6 @@ public class GestorServiceImpl implements IGestorService{
         
         this.facturaERepository.insertar(facturaElectronica);
 
-        // throw new RuntimeException();
+//        throw new RuntimeException();
 	}
 }
