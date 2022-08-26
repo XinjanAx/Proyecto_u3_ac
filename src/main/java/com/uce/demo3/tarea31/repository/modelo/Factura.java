@@ -3,8 +3,10 @@ package com.uce.demo3.tarea31.repository.modelo;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -34,7 +36,7 @@ public class Factura {
 	@JoinColumn(name = "fac_id_cliente")
 	private Cliente cliente;
 	
-	@OneToMany(mappedBy = "factura")
+	@OneToMany(mappedBy = "factura", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private List<DetalleFactura> detalles;
 
 	

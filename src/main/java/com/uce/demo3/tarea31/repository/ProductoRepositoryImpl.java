@@ -4,6 +4,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 import javax.transaction.Transactional;
+import javax.transaction.Transactional.TxType;
 
 import org.springframework.stereotype.Repository;
 
@@ -17,6 +18,7 @@ public class ProductoRepositoryImpl implements IProductoRepository{
 	private EntityManager entityManager;
 
 	@Override
+	@Transactional(value = TxType.NOT_SUPPORTED)
 	public Producto buscarProducto(String codigoBarras) {
 		TypedQuery<Producto> myTypedQuery = this.entityManager
 				.createQuery("SELECT p FROM Producto p  WHERE p.codigoBarras = :datoBarras", Producto.class)
@@ -25,6 +27,7 @@ public class ProductoRepositoryImpl implements IProductoRepository{
 	}
 
 	@Override
+	@Transactional(value = TxType.MANDATORY)
 	public void actualizarProducto(Producto producto) {
 		// TODO Auto-generated method stub
 		this.entityManager.merge(producto);

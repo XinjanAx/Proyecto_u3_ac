@@ -2,6 +2,7 @@ package com.uce.demo3.tarea31.service;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.transaction.Transactional;
@@ -25,86 +26,23 @@ import com.uce.demo3.tarea31.repository.modelo.Producto;
 public class GestorServiceImpl implements IGestorService{
 
 	@Autowired
-	private IClienteRepository clienteRepository;
-	
-	@Autowired
 	private IDetalleFRepository detalleFRepository;
 	
 	@Autowired
-	private IFacturaRepository facturaRepository;
+	private IFElectronicaService electronicaService;
 	
 	@Autowired
-	private IFacturaERepository facturaERepository;
-	
-	@Autowired
-	private IProductoRepository productoRepository;
+	private IFacturaService facturaService;
 	
 	
-	
-	@Override
-	@Transactional(value = TxType.REQUIRES_NEW)
-	public void comprar(String cedulaCliente, String numeroFactura, List<String> codigos) {
-		 
-		Cliente c1 = this.clienteRepository.buscarCliente(cedulaCliente);
-	        
-		 	Factura f1 = new Factura();
-	        f1.setCliente(c1);
-	        f1.setNumero(numeroFactura);
-	        f1.setFecha(LocalDateTime.now());
-	        this.facturaRepository.insertar(f1);
-
-	        
-	    BigDecimal subtotal;
-        BigDecimal monto  = new BigDecimal(0);
-        Integer items = 0;
-        
-	    for (String cod : codigos) {
-	        	
-	        	Producto p = this.productoRepository.buscarProducto(cod);
-	      
-	            DetalleFactura df = new DetalleFactura();
-	            	df.setCantidad(1);
-	            	df.setFactura(f1);
-	            	df.setProducto(p);
-	            	subtotal = p.getPrecio().multiply(new BigDecimal(df.getCantidad()));
-	            	df.setSubTotal(subtotal);
-	            this.detalleFRepository.insertar(df);
-	            
-	            monto = monto.add(subtotal);
-	            items = items + df.getCantidad();
-	           
-	            this.actualizarStock(p, df.getCantidad());
-	        }
-
-	        this.facturaRepository.insertar(f1);
-	        
-	        this.crearFacturaElectronica(numeroFactura, monto, items);
-	      
-	}
 	
 	@Override
 	@Transactional(value = TxType.REQUIRED)
-	public void actualizarStock(Producto p, Integer cantidad) {
-			Integer stock  = p.getStock() - cantidad;
-	        if(stock >= 0){
-	        	this.productoRepository.actualizarProducto(p);
-	        }
-	        else {
-	        	throw new RuntimeException();
-	        }
-	    }
-
-	@Override
-	@Transactional(value = TxType.REQUIRES_NEW)
-	public void crearFacturaElectronica(String numeroFact, BigDecimal monto, Integer items) {
-        FacturaElectronica facturaElectronica = new FacturaElectronica();
-        facturaElectronica.setFecha(LocalDateTime.now());
-        facturaElectronica.setMonto(monto);
-        facturaElectronica.setNItems(items);
-        facturaElectronica.setNumero(numeroFact);
-        
-        this.facturaERepository.insertar(facturaElectronica);
-
-//        throw new RuntimeException();
+	public void comprar(String cedulaCliente, String numeroFactura, List<String> codigos) {
+		 
+		BigDecimal monto = this.facturaService.crearFactura(cedulaCliente, numeroFactura, codigos);
+		
+	    this.electronicaService.crearFacturaElectronica(numeroFactura, monto, codigos.size());
+	      
 	}
 }
