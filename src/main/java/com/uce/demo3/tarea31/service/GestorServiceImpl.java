@@ -24,9 +24,6 @@ import com.uce.demo3.tarea31.repository.modelo.Producto;
 
 @Service
 public class GestorServiceImpl implements IGestorService{
-
-	@Autowired
-	private IDetalleFRepository detalleFRepository;
 	
 	@Autowired
 	private IFElectronicaService electronicaService;

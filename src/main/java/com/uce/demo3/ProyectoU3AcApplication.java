@@ -11,6 +11,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import com.uce.demo3.tarea31.repository.IProductoRepository;
 import com.uce.demo3.tarea31.service.IGestorService;
 
 
@@ -21,6 +22,9 @@ public class ProyectoU3AcApplication implements CommandLineRunner{
 
 	@Autowired
 	private IGestorService gestorService;
+	
+	@Autowired
+	private IProductoRepository iProductoRepository;
 	
 	public static void main(String[] args) {
 		SpringApplication.run(ProyectoU3AcApplication.class, args);
@@ -37,7 +41,8 @@ public class ProyectoU3AcApplication implements CommandLineRunner{
 		productos.add("3354784562");
 		productos.add("6843521118");
 
-		this.gestorService.comprar("1704456214", "0-0071-0054", productos);
+		//this.gestorService.comprar("1704456214", "0-0071-0054", productos);
 
+		Log.info(this.iProductoRepository.buscarProducto("638456465"));
 	}
 }
