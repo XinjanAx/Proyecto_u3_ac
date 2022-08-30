@@ -1,5 +1,9 @@
 package com.uce.demo3.funcional;
 
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Stream;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -12,7 +16,7 @@ public class MainInterfazFunction {
 
 		ConsumoMetodosHighOrder metodosHO = new ConsumoMetodosHighOrder();
 		
-		//	SUPPLIER
+//	SUPPLIER
 		System.out.println("SUPPLIER");
 		
 		//Clases
@@ -21,7 +25,6 @@ public class MainInterfazFunction {
 		
 		IPersonaSupplier<Integer> supplierTE = new PersonaSupplierTEImpl();
 		Log.info("Supplier 3ra Edad Clase: " + supplierTE.getNombre());
-		
 		
 		//Lambdas
 		IPersonaSupplier<String> supplierLambda = () -> "Alex2";
@@ -34,8 +37,13 @@ public class MainInterfazFunction {
 		String valor = metodosHO.consumirSupplier(()->"hola");
 		Log.info("HO Supplier "+valor);
 		
+		//JAVA
+		System.out.println("Java SUPPLIER");
+		Stream <String> test = Stream.generate(()-> "Alex Java").limit(2);
+		test.forEach(cadena -> System.out.println(cadena));
 		
-		//	CONSUMER
+		
+//	CONSUMER
 		System.out.println("\nCONSUMER");
 		
 		//Clases
@@ -49,7 +57,14 @@ public class MainInterfazFunction {
 		//Metodos High Orde
 		metodosHO.consumirConsumer(valor2 -> System.out.println(valor), 2);
 		
-		//	PREDICATE
+		//JAVA
+		System.out.println("Java CONSUMER");
+		List<Integer> listaNum = Arrays.asList(1,2,3,4,5);
+		listaNum.forEach(numero -> System.out.println(numero));
+		
+		
+		
+//	PREDICATE
 		System.out.println("\nPREDICATE");
 		//Clases
 		//Lambdas
@@ -57,9 +72,16 @@ public class MainInterfazFunction {
 		Log.info("Predicate Lambda "+predicateLambda.evaluar("Zinldjan"));
 		
 		//Metodos High Order
+		boolean respuesta = metodosHO.consumirPredicate(cadena -> cadena.contains("X"), "Zinldjan");
+		Log.info("HO Predicate:" + respuesta);
+		
+		//JAVA 
+		System.out.println("Java PREDICATE");
+		Stream<Integer> nuevaLista = listaNum.stream().filter(numero -> numero >= 3);
+		nuevaLista.forEach(numero -> System.out.println(numero));
 		
 		
-		//	FUNCTION
+//	FUNCTION
 		System.out.println("\nFUNCTION");
 		//Clases
 		//Lambdas
@@ -70,8 +92,17 @@ public class MainInterfazFunction {
 		String vHO = metodosHO.consumirFunction(valor3 ->"valor",1);
 		Log.info("HO FUNCTION: "+  vHO);
 		
+		//JAVA 
+		System.out.println("Java FUNCTION");
 		
-		//	UNARY OPERATOR
+		Stream<String>nuevaListaF= listaNum.stream().map(numLista -> {
+										Integer val = numLista +1;
+										String cadena = "num " + val.toString();
+										return cadena;
+										});
+		nuevaListaF.forEach(v -> System.out.println(v));
+		
+//	UNARY OPERATOR
 		System.out.println("\nUNARY OPERATOR");
 		//Clases
 		//Lambdas
@@ -81,9 +112,6 @@ public class MainInterfazFunction {
 		Log.info("UNARY OPERATOR Lambda "+unaryLambda.apply("7"));
 		
 		//Metodos High Order
-		
-		
-
 	}
 
 }
