@@ -9,6 +9,7 @@ public class Main {
 		
 		long to = System.currentTimeMillis();
 		
+		System.out.println("Hilo1 "+Thread.currentThread().getName());
 		Cajero c1 = new Cajero("Bena",Arrays.asList("Rumiñahui","Pablo","Saitama"));
 		Cajero c2 = new Cajero("Yisus",Arrays.asList("Lasso","Pedro","Genos"));
 		Cajero c3 = new Cajero("Guana",Arrays.asList("Ariana","Tairon","Fubuki"));
