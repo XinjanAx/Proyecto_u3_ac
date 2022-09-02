@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
-public class MainSteamParalelo {
+public class MainStreamParalelo {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
